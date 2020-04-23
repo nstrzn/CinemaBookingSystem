@@ -13,8 +13,8 @@ public class Show {
         this.theater = theater;
     }
 
-    public void displayShowInfo(){
-        System.out.println("Title: "+title+", Date: "+date+", Time: "+time+", Price per Ticket: "+price+", Theater: " + getTheater().getName());
+    public String showToString(){
+        return "Title: "+title+", Date: "+date+", Time: "+time+", Price per Ticket: "+price+", Theater: " + getTheater().getName();
     }
 
     //getters:

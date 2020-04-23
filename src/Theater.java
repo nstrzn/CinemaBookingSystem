@@ -7,6 +7,7 @@ public class Theater {
     private char[][] hall;
     private final char  EMPTY_SEAT = 'o';
     private final char OCCUPIED_SEAT = 'x';
+    private boolean adjoiningRequest;
     private Scanner scanner = new Scanner(System.in);
 
     public Theater(String name, int row, int seat){
@@ -67,7 +68,10 @@ public class Theater {
         return seat;
     }
 
-    //not working:
+    /**
+     * Takes number of seats as a parameter and allows user to choose multiple seats in a row.
+     * @param num
+     */
     public void chooseAdjoiningSeats(int num){
         int x,y;
         System.out.println("Choose the row.");
@@ -85,8 +89,11 @@ public class Theater {
             displaySeatInfo();}
     }
 
-    public boolean adjoining() {
-        boolean adj = false;
+    /**
+     * Asks user whether adjoining seats should be chosen. Assigns value to boolean "adjoiningRequest".
+     */
+    public void adjoining() {
+        boolean adj = adjoiningRequest;
         boolean validAnswer = false;
         System.out.println("Do you want adjoining seats?");
         while (!validAnswer) {
@@ -102,9 +109,12 @@ public class Theater {
             }
             System.out.println("Please answer again.");
         }
-        System.out.println(adj);
-        return adj;
     }
+
+    /**
+     * Reads user's input about number of seats.
+     * @return number of seats the user wants to book.
+     */
     public int howManySeats(){
         int num;
         System.out.println("How many Seats do you want to reserve?");
@@ -113,6 +123,7 @@ public class Theater {
             System.out.println("That's not possible. Please choose at least 1 seat.");
             howManySeats();
         }
+        scanner.nextLine();
         return num;
     }
 
@@ -121,14 +132,17 @@ public class Theater {
             chooseSeat();}
     }
 
-    //I also used this to call in the main method:
-    public void wholeReservation() {
+    /**
+     * Accomplishes the whole process of booking seat.
+     */
+    public void bookSeat() {
         int num = howManySeats();
         if (num == 1) {
             chooseSeat();
-        } else if (num > 1) {
+        } else {
+            adjoiningRequest = true;
             adjoining();
-            if (adjoining()) {
+            if (adjoiningRequest) {
                 chooseAdjoiningSeats(num);
             } else {
                 chooseMultiSeatNotAdj(num);

@@ -16,8 +16,8 @@ public class Customer {
         return telNum;
     }
 
-    public void displayCustomerInfo(){
-        System.out.println("Name: " + name + ", Telephone: " + telNum);
+    public String customerToString(){
+        return "Name: " + name + ", Telephone: " + telNum;
     }
 
 }
