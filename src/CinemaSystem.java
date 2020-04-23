@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +17,18 @@ public class CinemaSystem {
      * Main method of the cinema system. Makes the whole interaction with a customer
      */
     public void cinemaInterface(){
-
+        System.out.println("Welcome to the cinema system interface!" +
+                "\n Please enter:" +
+                "\n 1 to make a reservation" +
+                "\n 2 to cancel it.");
+        int choice = scanner.nextInt();
+        if(choice == 1){
+            bookTicket();
+        } else if (choice == 2){
+            cancelReservation();
+        } else {
+            System.out.println("You entered incorrect value");
+        }
     }
 
     /**
@@ -45,7 +55,6 @@ public class CinemaSystem {
         String customName = scanner.nextLine();
         System.out.println("Enter your phone number");
         String phone = scanner.nextLine();
-        System.out.println("You entered "+customName+" "+phone);
 
         Customer customer = new Customer(customName, phone);
         customers.add(customer);
@@ -55,7 +64,7 @@ public class CinemaSystem {
         Booking booking = new Booking(shows.get(showId-1), customer);
         bookings.add(booking);
 
-        System.out.println("You booked ticket for the movie: "+ booking.getShow().getTitle()+" for name:  "+ booking.getCustomer().getName());
+        System.out.println("You booked ticket for the movie: "+ booking.getShow().getTitle()+" for "+ booking.getCustomer().customerToString());
     }
 
     /**
